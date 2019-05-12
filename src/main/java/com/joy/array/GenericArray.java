@@ -55,6 +55,11 @@ public class GenericArray<T> {
         return -1;
     }
 
+    /**
+     * 增加某个元素，需要将该位置后面的元素集体后移（包括该位置），需要注意边界，是不是需要扩容，先扩容再移动
+     * @param index
+     * @param t
+     */
     public void add(int index, T t) {
         checkIndex(index);
         if (size == data.length) resize(2 * data.length);
@@ -78,7 +83,7 @@ public class GenericArray<T> {
     }
 
     /**
-     * 移除某个位置，要注意将某个位置后面的元素全部往前移
+     * 移除某个位置，要注意将某个位置后面的元素全部往前移。需要注意移动完以后是不是需要缩容
      * @param index
      * @return
      */
