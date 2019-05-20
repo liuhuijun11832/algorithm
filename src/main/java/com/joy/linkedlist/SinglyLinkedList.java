@@ -98,6 +98,13 @@ public class SinglyLinkedList {
         q.next = q.next.next;
     }
 
+    public void deleteByValue(){
+       if(null == head) return;
+        Node p = head;
+        Node q = null;
+
+    }
+
 
     public static class Node {
         private int data;
