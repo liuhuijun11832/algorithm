@@ -92,45 +92,69 @@ public class SinglyLinkedList {
             return;
         }
         Node q = head;
-        while(q != null || q.next != p){
+        while (q != null || q.next != p) {
             q = q.next;
         }
         q.next = q.next.next;
     }
 
-    public void deleteByValue(int value){
-       if(null == head) return;
+    public void deleteByValue(int value) {
+        if (null == head) return;
         Node p = head;
         Node q = null;
-        while( p != null && p.data != value ){
+        while (p != null && p.data != value) {
             q = p;
             p = p.next;
         }
-        if(p == null) return;
-        if(q == null) head = head.next;
+        if (p == null) return;
+        if (q == null) head = head.next;
     }
 
-    public boolean TFResult(Node left,Node right){
+    public boolean TFResult(Node left, Node right) {
         Node l = left;
         Node r = right;
 
-        System.out.println("left_:"+l.data);
-        System.out.println("right_:"+r.data);
-        while(l != null && r != null){
-            if (r.data == l.data){
+        System.out.println("left_:" + l.data);
+        System.out.println("right_:" + r.data);
+        while (l != null && r != null) {
+            if (r.data == l.data) {
                 l = l.next;
                 r = r.next;
                 continue;
             } else break;
+        }
+        System.out.println("什么结果");
+        if (l == null && r == null) {
             System.out.println("什么结果");
-            if(l ==null && r == null){
-                System.out.println("什么结果");
+            return true;
+        } else return false;
+    }
+
+    public boolean palindrome() {
+        if (head == null) return false;
+        else {
+            System.out.println("找到中间节点");
+            Node p = head;
+            Node q = head;
+            if (p.next == null) {
+                System.out.println("只有一个元素");
                 return true;
-            } else return false;
+            }
+            while (q.next != null && p.next != null) {
+                p = p.next;
+                q = q.next.next;
+            }
+            System.out.println("中间节点" + p.data);
+            System.out.println("开始执行奇数节点的回文判断");
+            Node leftLink = null;
+            Node rightLink = null;
+            if (q.next == null) {
+                rightLink = p.next;
+
+            }
         }
         return false;
     }
-
 
 
     public static class Node {
@@ -146,5 +170,5 @@ public class SinglyLinkedList {
             return data;
         }
     }
-
 }
+
