@@ -98,12 +98,39 @@ public class SinglyLinkedList {
         q.next = q.next.next;
     }
 
-    public void deleteByValue(){
+    public void deleteByValue(int value){
        if(null == head) return;
         Node p = head;
         Node q = null;
-
+        while( p != null && p.data != value ){
+            q = p;
+            p = p.next;
+        }
+        if(p == null) return;
+        if(q == null) head = head.next;
     }
+
+    public boolean TFResult(Node left,Node right){
+        Node l = left;
+        Node r = right;
+
+        System.out.println("left_:"+l.data);
+        System.out.println("right_:"+r.data);
+        while(l != null && r != null){
+            if (r.data == l.data){
+                l = l.next;
+                r = r.next;
+                continue;
+            } else break;
+            System.out.println("什么结果");
+            if(l ==null && r == null){
+                System.out.println("什么结果");
+                return true;
+            } else return false;
+        }
+        return false;
+    }
+
 
 
     public static class Node {
