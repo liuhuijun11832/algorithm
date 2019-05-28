@@ -30,12 +30,12 @@ public class SinglyLinkedList {
 
     public void insertToHead(int value) {
         Node newNode = new Node(value, null);
-        insertToHead(newNode);
+        insertHead(newNode);
     }
 
     //无头节点
     //表头部插入，可以将输入的顺序进行逆序
-    public void insertToHead(Node newNode) {
+    public void insertHead(Node newNode) {
         if (head == null) head = newNode;
         else {
             newNode.next = head;
@@ -43,7 +43,7 @@ public class SinglyLinkedList {
         }
     }
 
-    public void insertToTail(Node newNode) {
+    public void insertTail(Node newNode) {
         if (head == null) head = newNode;
         else {
             Node q = head;
@@ -53,6 +53,13 @@ public class SinglyLinkedList {
             newNode.next = q.next;
             q.next = newNode;
         }
+    }
+
+    //顺序插入
+    //链表尾部插入
+    public void insertTail(int value){
+        Node newNode = new Node(value, null);
+        insertTail(newNode);
     }
 
     public void insertAfter(Node p, int value) {
@@ -73,7 +80,7 @@ public class SinglyLinkedList {
 
     public void insertBefore(Node p, Node newNode) {
         if (p == null) return;
-        if (p == head) insertToHead(newNode);
+        if (p == head) insertHead(newNode);
         else {
             Node q = head;
             if (q == null) return;
@@ -142,8 +149,8 @@ public class SinglyLinkedList {
                 System.out.println("只有一个元素");
                 return true;
             }
-            //两个指针，一个每次走一位，一个每次走两位，直到快的到达尾节点
-            while (q.next != null && p.next != null) {
+            //两个指针，一个每次走一位，一个每次走两位 ，直到快的到达尾节点
+            while (q.next.next != null && p.next != null) {
                 p = p.next;
                 q = q.next.next;
             }
@@ -153,7 +160,7 @@ public class SinglyLinkedList {
             Node leftLink = null;
             Node rightLink = null;
             if (q.next == null) {
-                //p一定为链表重点，且链表数目为奇数
+                //p一定为链表中点，并且链表数量为奇数
                 rightLink = p.next;
                 //链表倒序一下的下一个节点则是左节点
                 leftLink = inverseLinkList(p).next;
@@ -188,6 +195,36 @@ public class SinglyLinkedList {
         return r;
     }
 
+    public static void main(String[] args) {
+        SinglyLinkedList link = new SinglyLinkedList();
+        System.out.println("hello");
+        //int data[] = {1};
+        //int data[] = {1,2};
+        //int data[] = {1,2,3,1};
+        //int data[] = {1,2,5};
+        //int data[] = {1,2,2,1};
+        // int data[] = {1,2,5,2,1};
+        int data[] = {1,2,2,1};
+
+        for(int i =0; i < data.length; i++){
+            //link.insertToHead(data[i]);
+            link.insertTail(data[i]);
+        }
+        // link.printAll();
+        // Node p = link.inverseLinkList_head(link.head);
+        // while(p != null){
+        //     System.out.println("aa"+p.data);
+        //     p = p.next;
+        // }
+
+        System.out.println("打印原始:");
+        //link.printAll();
+        if (link.palindrome()){
+            System.out.println("回文");
+        }else{
+            System.out.println("不是回文");
+        }
+    }
 
     public static class Node {
         private int data;
