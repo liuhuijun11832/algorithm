@@ -130,7 +130,9 @@ public class SinglyLinkedList {
         } else return false;
     }
 
+    //比较是否回文
     public boolean palindrome() {
+        //空链表直接为false
         if (head == null) return false;
         else {
             System.out.println("找到中间节点");
@@ -140,20 +142,50 @@ public class SinglyLinkedList {
                 System.out.println("只有一个元素");
                 return true;
             }
+            //两个指针，一个每次走一位，一个每次走两位，直到快的到达尾节点
             while (q.next != null && p.next != null) {
                 p = p.next;
                 q = q.next.next;
             }
+            //通过这种方式找到的p即为中间节点
             System.out.println("中间节点" + p.data);
             System.out.println("开始执行奇数节点的回文判断");
             Node leftLink = null;
             Node rightLink = null;
             if (q.next == null) {
+                //p一定为链表重点，且链表数目为奇数
                 rightLink = p.next;
-
+                //链表倒序一下的下一个节点则是左节点
+                leftLink = inverseLinkList(p).next;
+                System.out.println("左边第一个节点" + leftLink.data);
+                System.out.println("右边第一个节点" + rightLink.data);
+            }else{
+                rightLink = p.next;
+                leftLink = inverseLinkList(p);
             }
+            return TFResult(leftLink, rightLink);
         }
-        return false;
+    }
+
+    public Node inverseLinkList(Node p){
+        Node pre = null;
+        Node r = head;
+        Node next = null;
+        while(r != p){
+            //临时保存遍历到的节点的下一个节点
+            next = r.next;
+            //进行反转，将原来的前节点变成后节点
+            r.next = pre;
+            //保存当前节点
+            pre = r;
+            //将r往后移动一位
+            r = next;
+        }
+        //跳出循环时，pre是p的前一个节点，所以还需要进行一次反转赋值
+        r.next = pre;
+        //返回左半部分的中点之前的节点
+        //此处开始同步向两边比较
+        return r;
     }
 
 
