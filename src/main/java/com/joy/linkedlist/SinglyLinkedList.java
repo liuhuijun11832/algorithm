@@ -174,6 +174,30 @@ public class SinglyLinkedList {
         }
     }
 
+    //带节点的链表翻转
+    public Node inverseLinkList_head(Node p){
+        //新建一个头节点
+        Node head = new Node(9999, null);
+        //p 为原来整个的头节点，现在由head指向整个链表，所以head的下一个节点为p
+        head.next = p;
+        /**
+         * 带头节点的链表翻转，相当于从第二个元素开始重新建立链表
+         */
+        Node cur = p.next;
+        p.next = null;
+        Node next = null;
+        while(cur != null){
+            next = cur.next;
+            cur.next = head.next;
+            head.next = cur;
+            System.out.println("first"+head.data);
+            cur = next;
+        }
+        //返回左半部分中点之前的那个节点，从这里向两边比较
+        return head;
+    }
+
+    //无头节点的链表翻转
     public Node inverseLinkList(Node p){
         Node pre = null;
         Node r = head;
