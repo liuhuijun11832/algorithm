@@ -228,7 +228,7 @@ public class SinglyLinkedList {
         //int data[] = {1,2,5};
         //int data[] = {1,2,2,1};
         // int data[] = {1,2,5,2,1};
-        int data[] = {1,2,2,1};
+        int data[] = {1,2,3,4};
 
         for(int i =0; i < data.length; i++){
             //link.insertToHead(data[i]);
@@ -241,13 +241,19 @@ public class SinglyLinkedList {
         //     p = p.next;
         // }
 
-        System.out.println("打印原始:");
-        //link.printAll();
-        if (link.palindrome()){
-            System.out.println("回文");
-        }else{
-            System.out.println("不是回文");
-        }
+        Node p = link.inverseLinkList_head(link.head);
+         while(p != null){
+             System.out.println("aa"+p.data);
+             p = p.next;
+         }
+
+        //System.out.println("打印原始:");
+        ////link.printAll();
+        //if (link.palindrome()){
+        //    System.out.println("回文");
+        //}else{
+        //    System.out.println("不是回文");
+        //}
     }
 
     public static class Node {
