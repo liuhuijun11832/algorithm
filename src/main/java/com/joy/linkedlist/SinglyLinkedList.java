@@ -234,7 +234,7 @@ public class SinglyLinkedList {
             //link.insertToHead(data[i]);
             link.insertTail(data[i]);
         }
-        // link.printAll();
+         //link.printAll();
         // Node p = link.inverseLinkList_head(link.head);
         // while(p != null){
         //     System.out.println("aa"+p.data);
@@ -247,13 +247,13 @@ public class SinglyLinkedList {
              p = p.next;
          }
 
-        //System.out.println("打印原始:");
-        ////link.printAll();
-        //if (link.palindrome()){
-        //    System.out.println("回文");
-        //}else{
-        //    System.out.println("不是回文");
-        //}
+        System.out.println("打印原始:");
+        //link.printAll();
+        if (link.palindrome()){
+            System.out.println("回文");
+        }else{
+            System.out.println("不是回文");
+        }
     }
 
     public static class Node {
