@@ -13,13 +13,12 @@ public class BubbleSort {
             return null;
         }
         for (int i = 0; i < originalArray.length; i++) {
-            int j = i + 1;
             boolean isChanged = false;
-            for (; j < originalArray.length; j++) {
-                if(originalArray[j] < originalArray[i]){
+            for (int j = 0; j < originalArray.length - i - 1; j++) {
+                if(originalArray[j+1] < originalArray[j]){
                     int temp = originalArray[j];
-                    originalArray[j] = originalArray[i];
-                    originalArray[i] = temp;
+                    originalArray[j] = originalArray[j+1];
+                    originalArray[j + 1] = temp;
                     isChanged = true;
                 }
             }
