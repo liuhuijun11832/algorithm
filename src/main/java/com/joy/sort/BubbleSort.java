@@ -2,12 +2,21 @@ package com.joy.sort;
 
 /**
  * 冒泡排序
+ * 时间复杂度O(n)
+ * 原地排序
+ * 稳定排序
+ *
  *
  * @author Joy
  * @date 2020-11-08
  */
 public class BubbleSort {
 
+    /**
+     *  内层循环条件是 j = 0, j < originalArray.length，可以增加一个循环跳出条件
+     * @param originalArray
+     * @return
+     */
     public static int[] bubbleSort(int[] originalArray){
         if (originalArray == null) {
             return null;
