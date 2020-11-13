@@ -16,9 +16,13 @@ public class InsertionSort {
             int value = originalArray[i];
             int j = i - 1;
             for (; j >= 0; j--) {
-                if(originalArray[j+1] > value){
+                if(originalArray[j] > value){
+                    originalArray[j + 1] = originalArray[j];
+                }else{
+                    break;
                 }
             }
+            originalArray[j + 1] = value;
         }
         return originalArray;
     }
