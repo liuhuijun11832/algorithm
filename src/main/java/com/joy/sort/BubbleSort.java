@@ -1,8 +1,8 @@
 package com.joy.sort;
 
 /**
- * 冒泡排序
- * 时间复杂度O(n)
+ * 冒泡排序:相邻数据比较交换
+ * 时间复杂度O(n2)
  * 原地排序
  * 稳定排序
  *
@@ -17,7 +17,7 @@ public class BubbleSort {
      * @param originalArray
      * @return
      */
-    public static int[] bubbleSort(int[] originalArray){
+    public static int[] sort(int[] originalArray){
         if (originalArray == null) {
             return null;
         }
@@ -40,9 +40,18 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         int[] originalArray = new int[]{2, 3, 4, 6, 1, 5, 10, 9, 8, 7};
-        int[] afterSort = bubbleSort(originalArray);
+        int[] afterSort = sort(originalArray);
         for (int i : afterSort) {
             System.out.println(i);
         }
     }
+
+    /**
+     * 排序相关：
+     * 原地排序：不需要额外空间存储(不包含交换所需的临时空间),即空间复杂度O(1)
+     * 稳定排序：排序完不会导致原数组中相同的两个元素交换顺序
+     * 满有序度：一个排序好的数组的有序度=n(n-1)/2
+     * 有序度：数组中有序元素对个数
+     * 逆序度：与有序度相反，通常有序度+逆序度 = 满有序度
+     */
 }
