@@ -1,5 +1,7 @@
 package com.joy.sort;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -35,26 +37,37 @@ public class InsertionSort {
     }
 
     public static void main(String[] args) {
-        int[] originalArray = new int[]{2, 3, 4, 6, 1, 5, 10, 9, 8, 7};
-        int[] afterSort = sort(originalArray);
-        for (int i : afterSort) {
-            System.out.println(i);
-        }
+        //int[] originalArray = new int[]{2, 3, 4, 6, 1, 5, 10, 9, 8, 7};
+        //int[] afterSort = sort(originalArray);
+        //for (int i : afterSort) {
+        //    System.out.println(i);
+        //}
 
         int count = 1000;
-        int[] origin = new int[count];
+
         Random random = new Random();
-        for (int i = 0; i < count; i++) {
-            origin[i] = random.nextInt(count);
+        List<int[]> lists = new ArrayList<int[]>(1000);
+        for (int j = 0; j < 1000; j++) {
+            int[] origin = new int[count];
+            for (int i = 0; i < count; i++) {
+                origin[i] = random.nextInt(count);
+            }
+            lists.add(origin);
         }
         long curr = System.currentTimeMillis();
-        InsertionSort.sort(originalArray);
+        for (int[] list : lists) {
+            InsertionSort.sort(list);
+        }
         System.out.println(System.currentTimeMillis() - curr);
         curr = System.currentTimeMillis();
-        BubbleSort.sort(originalArray);
+        for (int[] list : lists) {
+            BubbleSort.sort(list);
+        }
         System.out.println(System.currentTimeMillis() - curr);
         curr = System.currentTimeMillis();
-        SelectionSort.sort(originalArray);
+        for (int[] list : lists) {
+            SelectionSort.sort(list);
+        }
         System.out.println(System.currentTimeMillis() - curr);
     }
 
