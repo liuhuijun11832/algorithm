@@ -28,33 +28,40 @@ public class AddTwoNumbers {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        StringBuilder sb = new StringBuilder();
-        ListNode next = l1;
-        while (next  != null){
-            sb.append(next.val);
+        int carry = 0,num = 0;
+        ListNode result = new ListNode();
+        ListNode next = result;
+        while (l1 != null && l2 != null) {
+            int val = l1.val + l2.val + carry;
+            num = val % 10;
+            carry = val / 10;
+            next.next = new ListNode(num);
             next = next.next;
+            l1 = l1.next;
+            l2 = l2.next;
         }
-        int i1 = Integer.parseInt(sb.toString());
-        sb = new StringBuilder();
-        next = l2;
-        while (next != null){
-            sb.append(next.val);
+        while (l1 != null){
+            int val = l1.val + carry;
+            carry = val / 10;
+            num = val % 10;
+            next.next = new ListNode(num);
             next = next.next;
+            l1 = l1.next;
         }
-        int i2 = Integer.parseInt(sb.toString());
-        int i3 = i1 + i2;
-        ListNode listNode = null;
-        char[] chars = String.valueOf(i3).toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            int val = Integer.parseInt(String.valueOf(chars[i]));
-            if(listNode == null){
-                listNode = new ListNode(val);
-            }else{
-                listNode = new ListNode(val, listNode);
-            }
+        while(l2 != null){
+            int val = l2.val + carry;
+            carry = val / 10;
+            num = val % 10;
+            next.next = new ListNode(num);
+            next = next.next;
+            l2 = l2.next;
+        }
 
+        if(carry > 0){
+            next.next = new ListNode(carry);
         }
-        return listNode;
+
+        return result.next;
     }
 
 
