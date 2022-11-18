@@ -21,7 +21,7 @@ public class QuickSort {
         int pivot = data[end];
         int i = start, j = start;
         int tmp;
-        while (j < end - 1){
+        while (j <= end - 1){
             if(data[j] < pivot){
                 tmp = data[i];
                 data[i] = data[j];
