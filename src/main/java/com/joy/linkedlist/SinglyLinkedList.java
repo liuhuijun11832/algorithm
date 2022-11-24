@@ -176,47 +176,61 @@ public class SinglyLinkedList {
 
     //带节点的链表翻转
     public Node inverseLinkList_head(Node p){
-        //新建一个头节点
+        ////新建一个头节点
+        //Node head = new Node(9999, null);
+        ////p 为原来整个的头节点，现在由head指向整个链表，所以head的下一个节点为p
+        //head.next = p;
+        ///**
+        // * 带头节点的链表翻转，相当于从第二个元素开始重新建立链表
+        // */
+        //Node cur = p.next;
+        //p.next = null;
+        //Node next = null;
+        //while(cur != null){
+        //    next = cur.next;
+        //    cur.next = head.next;
+        //    head.next = cur;
+        //    System.out.println("first"+head.data);
+        //    cur = next;
+        //}
+        ////返回左半部分中点之前的那个节点，从这里向两边比较
+        //return head;
         Node head = new Node(9999, null);
-        //p 为原来整个的头节点，现在由head指向整个链表，所以head的下一个节点为p
-        head.next = p;
-        /**
-         * 带头节点的链表翻转，相当于从第二个元素开始重新建立链表
-         */
         Node cur = p.next;
-        p.next = null;
         Node next = null;
-        while(cur != null){
+        while (cur != null){
+            // 临时保存当前节点的下一个
             next = cur.next;
+            // 修改当前节点的下一个为上一个节点
             cur.next = head.next;
+            // 将head的next指向当前节点，下一次循环使用
             head.next = cur;
-            System.out.println("first"+head.data);
+            // 游标后移
             cur = next;
         }
-        //返回左半部分中点之前的那个节点，从这里向两边比较
         return head;
     }
 
     //无头节点的链表翻转
     public Node inverseLinkList(Node p){
         Node pre = null;
-        Node r = head;
+        Node curr = head;
         Node next = null;
-        while(r != p){
+        while(curr != p){
             //临时保存遍历到的节点的下一个节点
-            next = r.next;
+            next = curr.next;
             //进行反转，将原来的前节点变成后节点
-            r.next = pre;
+            curr.next = pre;
             //保存当前节点
-            pre = r;
+            pre = curr;
             //将r往后移动一位
-            r = next;
+            curr = next;
         }
         //跳出循环时，pre是p的前一个节点，所以还需要进行一次反转赋值
-        r.next = pre;
+        curr.next = pre;
         //返回左半部分的中点之前的节点
         //此处开始同步向两边比较
-        return r;
+        return curr;
     }
 
     public static void main(String[] args) {
