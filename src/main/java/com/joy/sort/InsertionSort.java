@@ -45,6 +45,27 @@ public class InsertionSort {
 
         int count = 1000;
 
+        List<int[]> lists = getInts(count);
+        long curr = System.currentTimeMillis();
+        for (int[] list : lists) {
+            InsertionSort.sort(list);
+        }
+        System.out.println(System.currentTimeMillis() - curr);
+        lists = getInts(count);
+        curr = System.currentTimeMillis();
+        for (int[] list : lists) {
+            BubbleSort.sort(list);
+        }
+        System.out.println(System.currentTimeMillis() - curr);
+        lists = getInts(count);
+        curr = System.currentTimeMillis();
+        for (int[] list : lists) {
+            SelectionSort.sort(list);
+        }
+        System.out.println(System.currentTimeMillis() - curr);
+    }
+
+    private static List<int[]> getInts(int count) {
         Random random = new Random();
         List<int[]> lists = new ArrayList<int[]>(1000);
         for (int j = 0; j < 1000; j++) {
@@ -54,21 +75,7 @@ public class InsertionSort {
             }
             lists.add(origin);
         }
-        long curr = System.currentTimeMillis();
-        for (int[] list : lists) {
-            InsertionSort.sort(list);
-        }
-        System.out.println(System.currentTimeMillis() - curr);
-        curr = System.currentTimeMillis();
-        for (int[] list : lists) {
-            BubbleSort.sort(list);
-        }
-        System.out.println(System.currentTimeMillis() - curr);
-        curr = System.currentTimeMillis();
-        for (int[] list : lists) {
-            SelectionSort.sort(list);
-        }
-        System.out.println(System.currentTimeMillis() - curr);
+        return lists;
     }
 
 }
