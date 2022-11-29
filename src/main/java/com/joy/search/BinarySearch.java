@@ -11,7 +11,13 @@ package com.joy.search;
 public class BinarySearch {
 
     public static void main(String[] args) {
-
+        int[] a = new int[] {1, 2, 3, 4, 5};
+        System.out.println(BinarySearch.bSearch1(a, 3, 0, a.length - 1));//第一次出现的下标为2
+        int[] b = new int[] {1, 2, 2, 3, 4, 5};
+        System.out.println(BinarySearch.bSearch2(b, 2, 0, b.length - 1));//第一次出现的下标为1
+        System.out.println(BinarySearch.bSearch3(b, 2, 0, b.length - 1));//最后一次出现的下标为2
+        System.out.println(BinarySearch.bSearch4(b, 4, 0, b.length - 1));// 第一个大于等于4的下标为4
+        System.out.println(BinarySearch.bSearch5(b, 2, 0, b.length - 1));// 最后一个小于等于2的下标为2
     }
 
     /**
@@ -91,10 +97,11 @@ public class BinarySearch {
             if (mid == a.length - 1 || a[mid + 1] != value) {
                 return mid;
             } else {
-                r = mid - 1;
+                // 右边还有，需要从右边查询
+                l = mid + 1;
             }
         }
-        return -1;
+        return bSearch3(a, value, l, r);
     }
 
     /**
@@ -115,17 +122,40 @@ public class BinarySearch {
         int mid = l + ((r - l) >> 2);
         if (a[mid] < value) {
             l = mid + 1;
-        } else if (a[mid] > value) {
+        } else {
+            if (mid == 0 || a[mid - 1] < value) {
+                return mid;
+            }
+            r = mid - 1;
+        }
+        return bSearch4(a, value, l, r);
+    }
+
+    /**
+     * 二分查询变种，存在重复元素，查询最后一个小于等于给定值的元素
+     *
+     * @param a
+     * @param value
+     * @param l
+     * @param r
+     * @return
+     */
+    public static int bSearch5(int[] a, int value, int l, int r) {
+        // 这次用递归的写法
+        // 终止条件
+        if (l >= r) {
+            return -1;
+        }
+        int mid = l + ((r - l) >> 2);
+        if (a[mid] > value) {
             r = mid - 1;
         } else {
-            // 警惕数组越界，如果mid是数组最后一个就不用再判断下一位
-            if (mid == a.length - 1 || a[mid + 1] != value) {
+            if (mid == a.length - 1 || a[mid + 1] > value) {
                 return mid;
-            } else {
-                r = mid - 1;
             }
+            l = mid + 1;
         }
-        return -1;
+        return bSearch5(a, value, l, r);
     }
 
 }
