@@ -2,16 +2,7 @@ package com.joy.sort;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Set;
-import java.util.StringJoiner;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import com.google.common.base.Joiner;
 
 /**
  * 计数排序
@@ -44,8 +35,8 @@ public class CountingSort {
         }
         // 申请一个计数数组，分数就是下标
         int[] scoreRange = new int[max +1];
-        for (int i = 0; i < scores.length; i++) {
-            scoreRange[scores[i]]++;
+        for (int k : scores) {
+            scoreRange[k]++;
         }
         // 计数数组内的数据依次累加求和
         // 表示小于等于某个分数的数有多少位
