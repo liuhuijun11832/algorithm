@@ -98,13 +98,20 @@ public class Heap {
             heap.insert(a[i]);
         }
         // 方法2
-        Heap heap = new Heap(a);
+        Heap heap1 = new Heap(a);
         for(int i = count / 2; i >= 1; --i) {
-            heap.heapify(a, count, i);
+            heap1.heapify(a, count, i);
         }
         return heap;
     }
 
+    /**
+     * 堆化
+     * 每个节点堆化的时间复杂度都是O(logn)
+     * @param a 数组
+     * @param i 堆化的子树的根节点
+     * @param n 堆化到的最后一个元素的下标
+     */
     private void heapify(int[] a,int i, int n){
         while (true) {
             // 调整过以后，找到子树中最大元素的位置，然后和当前位置i进行交换，记录最大位置
