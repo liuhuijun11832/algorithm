@@ -25,7 +25,8 @@ public class Graph {
         graph.addEdge(6,8);
         graph.addEdge(8,10);
         graph.addEdge(3,10);
-        graph.bfs(1,9);
+        graph.bfs(1,10);
+        graph.dfs(1,10);
     }
 
     // 顶点个数
@@ -70,6 +71,7 @@ public class Graph {
                     prev[ve] = v;
                     // 该节点就是目标节点
                     if(ve == t){
+                        System.out.println("=======================bfs=======================");
                         print(prev, s, t);
                         return;
                     }
@@ -87,5 +89,52 @@ public class Graph {
             print(prev, s, prev[t]);
         }
         System.out.println(t + "");
+    }
+
+    public void dfs(int s, int t){
+        // 存储已经遍历的顶点，避免重复遍历
+        boolean[] visited = new boolean[v];
+        // 遍历路径，下标就是顶点，值是顶点的上个顶点
+        int[] prev = new int[v];
+        for (int i = 0; i < v; i++) {
+            prev[i] = -1;
+        }
+        System.out.println("=======================dfs==============================");
+        // 递归进行dfs
+        if (recurDfs(s, t, visited, prev)) {
+            print(prev, s, t);
+        }
+    }
+
+    /**
+     * 递归dfs
+     * @param v 起始顶点
+     * @param t 终止顶点
+     * @param visited 已经遍历过的顶点列表
+     * @param prev 遍历路径数组
+     * @return 是否找到目标顶点
+     */
+    public boolean recurDfs(int v, int t, boolean[] visited, int[] prev){
+        // 首先将当前起始顶点加入到数组
+        visited[v] = true;
+        // 递归终止条件位起始顶点就是终止顶点
+        if (v == t) {
+            return true;
+        }
+        // 每次递归判断是否找到，如果找到就直接跳出递归
+        boolean found = false;
+        for (int i = 0; i < adj[v].size(); i++) {
+            // 依次遍历该与该顶点相连的每个顶点，并且以每个顶点做起始顶点进行递归dfs，如果找到直接返回
+            // 如果找不到，在从下一个相连的顶点中进行dfs
+            int ve = adj[v].get(i);
+            if (!visited[ve]) {
+                prev[ve] = v;
+                found = recurDfs(ve, t, visited, prev);
+                if (found) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
