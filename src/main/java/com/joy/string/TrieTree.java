@@ -1,4 +1,4 @@
-package com.joy.tree;
+package com.joy.string;
 
 /**
  * Trie树

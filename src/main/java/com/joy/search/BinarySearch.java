@@ -30,7 +30,7 @@ public class BinarySearch {
      */
     public static int bSearch1(int[] a, int value, int l, int r) {
         while (l <= r) {
-            int mid = l + ((r - l) >> 2);
+            int mid = l + ((r - l) >> 1);
             if (a[mid] == value) {
                 return mid;
             }
@@ -54,7 +54,7 @@ public class BinarySearch {
      */
     public static int bSearch2(int[] a, int value, int l, int r) {
         while (l <= r) {
-            int mid = l + ((r - l) >> 2);
+            int mid = l + ((r - l) >> 1);
             if (a[mid] < value) {
                 l = mid + 1;
             } else if (a[mid] > value) {
@@ -84,10 +84,10 @@ public class BinarySearch {
     public static int bSearch3(int[] a, int value, int l, int r) {
         // 这次用递归的写法
         // 终止条件
-        if (l >= r) {
+        if (l > r) {
             return -1;
         }
-        int mid = l + ((r - l) >> 2);
+        int mid = l + ((r - l) >> 1);
         if (a[mid] < value) {
             l = mid + 1;
         } else if (a[mid] > value) {
@@ -107,19 +107,19 @@ public class BinarySearch {
     /**
      * 二分查询变种，存在重复元素，查询第一个大于等于给定值的元素
      *
-     * @param a
-     * @param value
-     * @param l
-     * @param r
+     * @param a 给定数组
+     * @param value 给定值
+     * @param l 左下标
+     * @param r 右下标
      * @return
      */
     public static int bSearch4(int[] a, int value, int l, int r) {
         // 这次用递归的写法
         // 终止条件
-        if (l >= r) {
+        if (l > r) {
             return -1;
         }
-        int mid = l + ((r - l) >> 2);
+        int mid = l + ((r - l) >> 1);
         if (a[mid] < value) {
             l = mid + 1;
         } else {
@@ -143,10 +143,10 @@ public class BinarySearch {
     public static int bSearch5(int[] a, int value, int l, int r) {
         // 这次用递归的写法
         // 终止条件
-        if (l >= r) {
+        if (l > r) {
             return -1;
         }
-        int mid = l + ((r - l) >> 2);
+        int mid = l + ((r - l) >> 1);
         if (a[mid] > value) {
             r = mid - 1;
         } else {
