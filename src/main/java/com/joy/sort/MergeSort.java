@@ -17,6 +17,9 @@ package com.joy.sort;
  */
 public class MergeSort {
 
+    // 求解逆序对
+    private static int num = 0;
+
     public static void main(String[] args) {
         int[] a = new int[]{3,2,6,1,3,4,8};
         sort(a, 0, 6);
@@ -58,6 +61,7 @@ public class MergeSort {
                 tmp[k++] = a[i++];
             } else {
                 tmp[k++] = a[j++];
+                num += mid - i + 1;
             }
         }
         while (i <= mid) {

@@ -38,8 +38,4 @@ public class GreedyAlgo {
         return n;
     }
 
-    public static int CoinProblem() {
-        return 0;
-    }
-
 }
