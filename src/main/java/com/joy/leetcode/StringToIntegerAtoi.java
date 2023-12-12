@@ -10,64 +10,47 @@ public class StringToIntegerAtoi {
     public static void main(String[] args) {
         StringToIntegerAtoi aaaa = new StringToIntegerAtoi();
         System.out.println(aaaa.myAtoi("    -42"));
+        System.out.println(aaaa.myAtoi("42"));
         System.out.println(aaaa.myAtoi("4193 with words"));
-        System.out.println(aaaa.myAtoi(" with words 20010"));
+        System.out.println(aaaa.myAtoi("     with words 20010"));
+        System.out.println(aaaa.myAtoi("+1"));
     }
 
     public int myAtoi(String s) {
-        StringBuilder sb = new StringBuilder();
-        int index = 0, symbol = 1;
-        while (index < s.length()){
-            char c = s.charAt(index++);
-            if(c == ' '){
-                if(sb.length() == 0){
-                    continue;
-                }else{
-                    break;
-                }
-            }
-            if(c == '-'){
-                if(sb.length() == 0){
-                    symbol = -1;
-                }else{
-                    break;
-                }
-            }
-            if (Character.isDigit(c)) {
-                sb.append(c);
-            }else if(sb.length() > 0 || Character.isLetter(c)){
-                break;
-            }
-        }
-        if(sb.length() == 0){
+        if (s.isEmpty()) {
             return 0;
         }
-        if(symbol == 1){
-            if(sb.length() > String.valueOf(Integer.MAX_VALUE).length()){
-                return Integer.MAX_VALUE;
-            }else if(sb.length() == String.valueOf(Integer.MAX_VALUE).length()){
-                if(Integer.parseInt(sb.substring(0, sb.length() - 1)) > (Integer.MAX_VALUE/10)){
-                    return Integer.MAX_VALUE;
-                }else if(Integer.parseInt(sb.substring(0, sb.length() - 1)) == (Integer.MAX_VALUE/10)){
-                    if(Integer.MAX_VALUE % 10 < Integer.parseInt(Character.toString(s.charAt(s.length()-1))) ){
-                        return Integer.MAX_VALUE;
-                    }
+        s = s.trim();
+        // 状态机 0表示初始，1表示符号，2表示数字，3表示结束
+        int state = 0, result = 0, index = 0, sign = 1;
+        while (state != 3 && index < s.length()) {
+            char c = s.charAt(index);
+            if (state == 0 && (c == '-' || c == '+')) {
+                state = 1;
+                if (c == '-') {
+                    sign = -1;
                 }
-            }
-        }else {
-            if(sb.length() > String.valueOf(Integer.MIN_VALUE).length() - 1){
-                return Integer.MIN_VALUE;
-            }else if(sb.length() == String.valueOf(Integer.MIN_VALUE).length() - 1){
-                if(Integer.parseInt(sb.substring(0, sb.length() - 2)) > (Integer.MIN_VALUE/10)){
-                    return Integer.MIN_VALUE;
-                }else if(Integer.parseInt(sb.substring(0, sb.length() - 2)) == (Integer.MIN_VALUE/10)){
-                    if(Integer.MIN_VALUE % 10 < Integer.parseInt(Character.toString(s.charAt(s.length()-1))) ){
+            } else if (Character.isDigit(c)) {
+                if(state == 0){
+                    state = 1;
+                }
+                if(state == 1){
+                    result = (c - '0') * sign;
+                }else {
+                    if(result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && (c - '0') > Integer.MAX_VALUE % 10)){
+                        return Integer.MAX_VALUE;
+                    }else if(result < Integer.MIN_VALUE / 10 || (result == Integer.MIN_VALUE / 10 && (c - '0') > -(Integer.MIN_VALUE % 10))){
                         return Integer.MIN_VALUE;
                     }
+                    result = result * 10 + (c - '0') * sign;
                 }
+                state = 2;
+            } else {
+                state = 3;
             }
+            index++;
         }
-        return Integer.parseInt(sb.toString()) * symbol;
+        return result;
     }
 
 }
